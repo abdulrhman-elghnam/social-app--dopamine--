@@ -1,12 +1,18 @@
 import { NotFoundException } from './common/exception/main.exception';
 import { ResponseFormatter } from './common/handler/sendSuccessHandler';
 
-export const mainService = ResponseFormatter({
-  handler: () => ({
-    messageCode: 101,
-  }),
-});
+export class AppService {
 
-export const notFoundService = () => {
-  throw new NotFoundException({ messageCode: 102 });
-};
+  public mainService = ResponseFormatter({
+    handler: () => {
+      return {
+        messageCode: 101,
+      }
+    },
+  });
+
+  public notFoundService = () => {
+    throw new NotFoundException({ messageCode: 102 });
+  };
+
+}

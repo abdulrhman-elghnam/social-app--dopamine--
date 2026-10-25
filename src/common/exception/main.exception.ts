@@ -1,5 +1,5 @@
 import { AppError } from './appException';
-import type { IAppErrorOptions } from './interface/exception.type';
+import type { IAppErrorOptions } from './interface/exceptionType';
 
 export class BadRequestException extends AppError {
   constructor(options: IAppErrorOptions = {}) {

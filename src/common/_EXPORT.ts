@@ -4,5 +4,4 @@ export * from './handler/_INDEX.js';
 export * from './middleware/_INDEX.js';
 export * from './pipe/_INDEX.js';
 export * from './service/_INDEX.js';
-export * from './util/_INDEX.js';
 export * from './value/_INDEX.js';

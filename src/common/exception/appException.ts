@@ -1,4 +1,4 @@
-import type { IAppErrorOptions } from './interface/exception.type';
+import type { IAppErrorOptions } from './interface/exceptionType';
 
 export class AppError extends Error {
   readonly statusCode: number;
