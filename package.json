@@ -1,0 +1,21 @@
+{
+  "name": "dopamine",
+  "version": "1.0.0",
+  "description": "",
+  "license": "ISC",
+  "author": "",
+  "type": "module",
+  "main": "./dist/main.js",
+  "scripts": {
+    "start:dev": "concurrently -k \"tsc --watch\" \"node --watch ./dist/main.js\"",
+    "start:prod-local": "cross-env NODE_ENV=prod node --watch ./src/main.js",
+    "start:prod": "cross-env NODE_ENV=prod pm2 start ./src/main.js -i max",
+    "format": "npx prettier . --write"
+  },
+  "dependencies": {
+    "concurrently": "^10.0.6"
+  },
+  "devDependencies": {
+    "prettier": "3.9.10"
+  }
+}
