@@ -1,4 +1,5 @@
-import { ApiLanguage } from '../common/value/systemEnum.js';
+
+import { ApiLanguage } from '../../common/value/systemEnum';
 import * as ArabicMessages from './ar.json';
 import * as EnglishMessages from './en.json';
 import { ChooseLanguageOptions } from './interface/LanguageType.js';

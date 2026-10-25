@@ -1,6 +1,7 @@
 import type { NextFunction, Request, Response } from 'express';
 import type { IHandlerFunction } from './interface/handlerType';
-import { chooseLanguage } from '../../lang/lang.js';
+import { chooseLanguage } from '../../core/language/_INDEX';
+
 
 export const ResponseFormatter = ({ handler }: IHandlerFunction) => {
   return async (req: Request, res: Response, next: NextFunction) => {
