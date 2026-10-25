@@ -1,5 +1,5 @@
 import type { NextFunction, Request, Response } from 'express';
-import { IHandlerFunction } from './interface/handlerType';
+import type { IHandlerFunction } from './interface/handlerType';
 
 export const ResponseFormatter = ({ handler }: IHandlerFunction) => {
   return async (req: Request, res: Response, next: NextFunction) => {

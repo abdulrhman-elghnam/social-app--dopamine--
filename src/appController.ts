@@ -7,5 +7,5 @@ export const appController: RouterType = Router({
   strict: true,
   mergeParams: true,
 });
-appController.get('/', () => mainService());
+appController.get('/', mainService);
 appController.all('/{*splash}', () => notFoundService());
