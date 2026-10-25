@@ -1,0 +1,5 @@
+
+@Host = http://127.0.0.1:3000
+GET {{Host}} HTTP/1.1
+###
+GET {{Host}}/any HTTP/1.1
