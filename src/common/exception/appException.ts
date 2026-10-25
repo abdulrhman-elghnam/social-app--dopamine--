@@ -2,7 +2,7 @@ import type { IAppErrorOptions } from './interface/exception.type';
 
 export class AppError extends Error {
   readonly statusCode: number;
-  readonly messageCode: string | undefined;
+  readonly messageCode: number | undefined;
   readonly extra: unknown;
   readonly isOperational = true;
 

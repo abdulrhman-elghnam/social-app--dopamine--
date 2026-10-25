@@ -1,5 +1,20 @@
 import type { ErrorRequestHandler } from 'express';
-import { IError } from './interface/handlerType';
+import { chooseLanguage } from '../../lang/lang.js';
+import type { IError } from './interface/handlerType';
+
+const statusMessageCodes: Record<number, number> = {
+  400: 108,
+  401: 109,
+  403: 110,
+  404: 111,
+  405: 117,
+  408: 118,
+  409: 112,
+  422: 113,
+  429: 114,
+  500: 115,
+  503: 116,
+};
 
 export const globalErrorHandling: ErrorRequestHandler = (error, req, res, next) => {
   if (res.headersSent) {
@@ -13,9 +28,16 @@ export const globalErrorHandling: ErrorRequestHandler = (error, req, res, next) 
     typeof status === 'number' && Number.isInteger(status) && status >= 400 && status <= 599
       ? status
       : 500;
+  const messageCode =
+    typeof normalizedError.messageCode === 'number' && Number.isInteger(normalizedError.messageCode)
+      ? normalizedError.messageCode
+      : (statusMessageCodes[statusCode] ?? 103);
+
+  const language = req.get('accept-language');
+  const languageOption = language === undefined ? {} : { lang: language };
 
   return res.status(statusCode).json({
-    errorMessage: normalizedError.message || 'server error',
+    errorMessage: chooseLanguage({ ...languageOption, code: messageCode }),
     error: normalizedError,
     cause: normalizedError.cause,
     stack: normalizedError.stack,

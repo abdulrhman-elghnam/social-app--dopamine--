@@ -1,5 +1,5 @@
 export interface IAppErrorOptions {
   message?: string;
-  messageCode?: string;
+  messageCode?: number;
   extra?: unknown;
 }
