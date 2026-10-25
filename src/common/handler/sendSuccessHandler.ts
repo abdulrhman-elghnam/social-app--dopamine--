@@ -2,7 +2,6 @@ import type { NextFunction, Request, Response } from 'express';
 import type { IHandlerFunction } from './interface/handlerType';
 import { chooseLanguage } from '../../core/language/_INDEX';
 
-
 export const ResponseFormatter = ({ handler }: IHandlerFunction) => {
   return async (req: Request, res: Response, next: NextFunction) => {
     const result = await handler(req, res, next);
@@ -11,6 +10,7 @@ export const ResponseFormatter = ({ handler }: IHandlerFunction) => {
 
     const language = req.get('accept-language');
     const languageOption = language === undefined ? {} : { lang: language };
+
     const message =
       result?.messageCode === undefined
         ? (result?.message ?? chooseLanguage({ ...languageOption, code: 107 }))

@@ -18,7 +18,6 @@ interface AuthorizationOptions {
 
 export const authorizationGuard = ({ role = [] }: AuthorizationOptions = {}) => {
   return (req: Request, _res: Response, next: NextFunction) => {
-    
     if (!req.user) {
       throw new UnauthorizedException({ messageCode: 109 });
     }

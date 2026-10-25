@@ -1,5 +1,4 @@
-import { ApiLanguage } from "../../../common/value/systemEnum";
-
+import { ApiLanguage } from '../../../common/value/systemEnum';
 
 export interface ChooseLanguageOptions {
   lang?: ApiLanguage | string;

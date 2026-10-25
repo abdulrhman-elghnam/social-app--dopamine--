@@ -1,5 +1,4 @@
-export enum ApiLanguage  {
-  ENGLISH= 'EN',
-  ARABIC= 'AR',
-};
-
+export enum ApiLanguage {
+  ENGLISH = 'EN',
+  ARABIC = 'AR',
+}

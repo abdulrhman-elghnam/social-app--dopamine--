@@ -3,7 +3,6 @@ import type { ErrorRequestHandler } from 'express';
 import type { IError } from './interface/handlerType';
 import { chooseLanguage } from '../../core/language/_INDEX';
 
-
 const statusMessageCodes: Record<number, number> = {
   400: 108,
   401: 109,

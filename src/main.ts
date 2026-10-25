@@ -9,15 +9,15 @@ const app: Application = express();
 const appAPI = new AppController(new AppService());
 
 class Server {
-  constructor() { }
+  constructor() {}
   public run = () => {
     app.use(appAPI.appController);
     app.use(globalErrorHandling);
     app.listen(3000, () => {
       console.log('server is running in 3000');
     });
-  }
+  };
 }
 
-const server = new Server()
-server.run()
+const server = new Server();
+server.run();
