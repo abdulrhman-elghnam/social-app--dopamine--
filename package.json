@@ -10,6 +10,9 @@
     "start:dev": "concurrently -k \"tsc --watch\" \"node --watch ./dist/main.js\"",
     "start:prod-local": "cross-env NODE_ENV=prod node --watch ./src/main.js",
     "start:prod": "cross-env NODE_ENV=prod pm2 start ./src/main.js -i max",
+    "lint": "oxlint",
+    "lint:fix": "oxlint --fix",
+    "lint:config": "oxlint --init",
     "format": "npx prettier . --write"
   },
   "dependencies": {
@@ -17,15 +20,10 @@
     "express": "^5.3.0"
   },
   "devDependencies": {
-    "@eslint/css": "^2.0.1",
-    "@eslint/js": "^10.0.1",
-    "@eslint/json": "^2.1.1",
-    "@eslint/markdown": "^8.0.3",
     "@types/express": "^5.0.6",
     "@types/node": "^26.6.5",
-    "eslint": "^10.13.0",
     "globals": "^17.13.0",
-    "prettier": "3.9.10",
-    "typescript-eslint": "^8.72.0"
+    "oxlint": "^1.89.0",
+    "prettier": "3.9.10"
   }
 }
