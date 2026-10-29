@@ -1,12 +1,12 @@
-export class cacheService {
-  private static instance: cacheService;
+export class MailService {
+  private static instance: MailService;
 
   private constructor() {}
 
-  static getInstance(): cacheService {
-    if (!cacheService.instance) {
-      cacheService.instance = new cacheService();
+  static getInstance(): MailService {
+    if (!MailService.instance) {
+      MailService.instance = new MailService();
     }
-    return cacheService.instance;
+    return MailService.instance;
   }
 }

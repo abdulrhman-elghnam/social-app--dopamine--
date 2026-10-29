@@ -1,23 +1,30 @@
 import express from 'express';
 import type { Application } from 'express';
-import { AppController } from './appController';
-import { AppService } from './appService';
-import { globalErrorHandling } from './common/util/errorHandler';
+import { AppController } from './appController.js';
+import { AppService } from './appService.js';
+import { UtilService } from './common/service/utilService.js';
+
 
 const app: Application = express();
 
-const appAPI = new AppController(new AppService());
+app.use(express.json());
+
+const appRoute = new AppController(await AppService.getInstance(),await UtilService.getInstance());
+
+app.use(appRoute.appController);
+
 
 class Server {
-  constructor() {}
+   constructor(
+    private readonly utilService : UtilService
+  ){}
   public run = () => {
-    app.use(appAPI.appController);
-    app.use(globalErrorHandling);
     app.listen(3000, () => {
-      console.log('server is running in 3000');
+      app.use(this.utilService.globalErrorHandling);
+      console.log('Server is running on port 3000');
     });
   };
 }
 
-const server = new Server();
+const server = new Server(await UtilService.getInstance());
 server.run();

@@ -1,4 +1,3 @@
-
 import { IAppErrorOptions } from '../interface/error.interface.js';
 import { AppError } from './appException.js';
 

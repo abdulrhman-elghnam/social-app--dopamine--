@@ -1,15 +1,11 @@
 {
   "compilerOptions": {
-    "rootDir": "./src",
+    "rootDir": "./source",
     "outDir": "./dist",
     "module": "nodenext",
     "target": "esnext",
-    "types": [
-      "node"
-    ],
-    "lib": [
-      "esnext"
-    ],
+    "types": ["node"],
+    "lib": ["esnext"],
     "resolveJsonModule": true,
     "sourceMap": true,
     "declaration": true,
@@ -32,11 +28,6 @@
     "moduleDetection": "force",
     "skipLibCheck": true
   },
-  "include": [
-    "src/**/*"
-  ],
-  "exclude": [
-    "node_modules",
-    "dist"
-  ]
+  "include": ["source/**/*.ts"],
+  "exclude": ["node_modules", "dist"]
 }

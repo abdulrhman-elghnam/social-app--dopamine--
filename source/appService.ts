@@ -1,17 +1,38 @@
-import { NotFoundException } from './common/exception/main.exception';
-import { ResponseFormatter } from './common/util/sendSuccessHandler';
-
+import { NotFoundException } from './common/exception/main.exception.js';
+import { UtilService } from './common/service/utilService.js';
 
 export class AppService {
-  public mainService = ResponseFormatter({
-    handler: () => {
-      return {
-        messageCode: 101,
-      };
-    },
-  });
+  private static instancePromise: Promise<AppService> | undefined;
 
-  public notFoundService = () => {
-    throw new NotFoundException("Route Not Found",{ messageCode: 102 });
-  };
+  private constructor(
+    private readonly utilService: UtilService,
+  ) {}
+
+  public static getInstance(): Promise<AppService> {
+    if (!AppService.instancePromise) {
+      AppService.instancePromise = AppService.createInstance();
+    }
+
+    return AppService.instancePromise;
+  }
+
+  private static async createInstance(): Promise<AppService> {
+    const utilService = await UtilService.getInstance();
+
+    return new AppService(utilService);
+  }
+
+  public mainService() {
+    return this.utilService.responseFormatter({
+      handler: () => ({
+        messageCode: 101,
+      }),
+    });
+  }
+
+  public notFoundService() {
+    throw new NotFoundException('Route Not Found', {
+      messageCode: 102,
+    });
+  }
 }

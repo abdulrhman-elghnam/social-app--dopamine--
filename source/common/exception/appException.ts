@@ -1,4 +1,4 @@
-import { IAppErrorOptions } from "../interface/error.interface";
+import { IAppErrorOptions } from '../interface/error.interface.js';
 
 export class AppError extends Error {
   readonly statusCode: number;
@@ -6,10 +6,7 @@ export class AppError extends Error {
   readonly extra: unknown;
   readonly isOperational = true;
 
-  constructor(
-    message = "Internal server error",
-    options: IAppErrorOptions = {},
-  ) {
+  constructor(message = 'Internal server error', options: IAppErrorOptions = {}) {
     super(message);
 
     this.name = new.target.name;

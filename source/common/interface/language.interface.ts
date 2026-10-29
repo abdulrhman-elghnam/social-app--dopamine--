@@ -1,6 +1,8 @@
-import { ApiLanguage } from "../value/systemEnum";
+import { ApiLanguage } from '../value/systemEnum.js';
 
 export interface ChooseLanguageOptions {
-  lang?: ApiLanguage | string;
+  language?: ApiLanguage | string;
   code?: number;
 }
+
+export type LanguageDictionary = Record<string, string>;

@@ -1,10 +1,4 @@
-import { NextFunction , Request , Response} from "express";
-
-export interface IError extends Error {
-  status?: unknown;
-  statusCode?: unknown;
-  messageCode?: unknown;
-}
+import { NextFunction, Request, Response } from 'express';
 
 export interface IHandlerResult {
   status?: number;
