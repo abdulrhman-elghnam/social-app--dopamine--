@@ -1,4 +1,4 @@
-import { NotFoundException } from './common/exception/main.exception.js';
+import { NotFoundException } from './common/exception/mainException.js';
 import { UtilService } from './common/service/utilService.js';
 
 export class AppService {

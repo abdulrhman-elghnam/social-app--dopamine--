@@ -1,5 +1,5 @@
 import type { NextFunction, Request, Response } from 'express';
-import { ForbiddenException, UnauthorizedException } from '../exception/main.exception.js';
+import { ForbiddenException, UnauthorizedException } from '../exception/mainException.js';
 import { SystemRoleEnum } from '../value/securityEnum.js';
 
 declare global {
