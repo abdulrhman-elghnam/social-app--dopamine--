@@ -10,8 +10,8 @@ export const authenticationGuard = ({ tokenType = TokenTypeEnum.ACCESS } = {}) =
     const authorization = req.headers.authorization;
 
     if (!authorization) {
-      throw new UnauthorizedException({
-        messageCode: 306,
+      throw new UnauthorizedException("Authentication required",{
+        messageCode : 109
       });
     }
 

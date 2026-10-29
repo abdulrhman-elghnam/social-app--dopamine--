@@ -1,7 +1,8 @@
-import { ApiLanguage } from '../../common/value/systemEnum';
+
+import { ChooseLanguageOptions } from '../common/interface/language.interface';
+import { ApiLanguage } from '../common/value/systemEnum';
 import * as ArabicMessages from './ar.json';
 import * as EnglishMessages from './en.json';
-import { ChooseLanguageOptions } from './interface/LanguageType.js';
 
 export type LanguageMessages = Readonly<Record<string, string>>;
 

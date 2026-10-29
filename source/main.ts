@@ -2,7 +2,7 @@ import express from 'express';
 import type { Application } from 'express';
 import { AppController } from './appController';
 import { AppService } from './appService';
-import { globalErrorHandling } from './common/handler/errorHandler';
+import { globalErrorHandling } from './common/util/errorHandler';
 
 const app: Application = express();
 

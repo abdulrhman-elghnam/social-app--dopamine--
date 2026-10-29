@@ -1,5 +1,6 @@
 import { NotFoundException } from './common/exception/main.exception';
-import { ResponseFormatter } from './common/handler/sendSuccessHandler';
+import { ResponseFormatter } from './common/util/sendSuccessHandler';
+
 
 export class AppService {
   public mainService = ResponseFormatter({
@@ -11,6 +12,6 @@ export class AppService {
   });
 
   public notFoundService = () => {
-    throw new NotFoundException({ messageCode: 102 });
+    throw new NotFoundException("Route Not Found",{ messageCode: 102 });
   };
 }

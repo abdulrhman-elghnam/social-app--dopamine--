@@ -1,4 +1,4 @@
-import type { IAppErrorOptions } from './interface/exceptionType';
+import { IAppErrorOptions } from "../interface/error.interface";
 
 export class AppError extends Error {
   readonly statusCode: number;
@@ -7,15 +7,15 @@ export class AppError extends Error {
   readonly isOperational = true;
 
   constructor(
-    { message = 'Internal server error', messageCode, extra }: IAppErrorOptions = {},
-    statusCode = 500
+    message = "Internal server error",
+    options: IAppErrorOptions = {},
   ) {
     super(message);
 
     this.name = new.target.name;
-    this.statusCode = statusCode;
-    this.messageCode = messageCode;
-    this.extra = extra;
+    this.statusCode = options.statusCode ?? 500;
+    this.messageCode = options.messageCode;
+    this.extra = options.extra;
 
     Object.setPrototypeOf(this, new.target.prototype);
     Error.captureStackTrace?.(this, new.target);
