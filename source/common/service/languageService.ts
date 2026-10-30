@@ -1,6 +1,6 @@
 import fs from 'node:fs/promises';
-import type { LanguageDictionary } from '../interface/language.interface.js';
-import { ApiLanguage } from '../value/system.enum.js';
+import type { LanguageDictionary } from '../interface/languageInterface.js';
+import { ApiLanguage } from '../value/systemEnum.js';
 
 export class LanguageService {
   private static instancePromise: Promise<LanguageService> | undefined;

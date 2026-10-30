@@ -2,7 +2,7 @@ import type { RequestHandler } from 'express';
 import type { ZodType } from 'zod';
 
 import { z } from 'zod';
-import { ConflictException } from '../exception/main.exception.js';
+import { ConflictException } from '../exception/mainException.js';
 
 interface ValidationSchema {
   body?: ZodType;

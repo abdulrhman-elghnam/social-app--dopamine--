@@ -1,4 +1,4 @@
-import { IAppErrorOptions } from '../interface/error.interface.js';
+import { IAppErrorOptions } from '../interface/errorInterface.js';
 
 export class AppError extends Error {
   readonly statusCode: number;

@@ -1,9 +1,9 @@
 import type { ErrorRequestHandler, NextFunction, Request, Response } from 'express';
 
-import type { IHandlerFunction } from '../interface/response.interface.js';
-import type { IError } from '../interface/error.interface.js';
+import type { IHandlerFunction } from '../interface/responseInterface.js';
+import type { IError } from '../interface/errorInterface.js';
 
-import { LanguageService } from './language.service.js';
+import { LanguageService } from './languageService.js';
 
 export class UtilService {
   private static instancePromise: Promise<UtilService> | undefined;
