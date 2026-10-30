@@ -2,16 +2,6 @@ import type { NextFunction, Request, Response } from 'express';
 import { ForbiddenException, UnauthorizedException } from '../exception/mainException.js';
 import { SystemRoleEnum } from '../value/securityEnum.js';
 
-declare global {
-  namespace Express {
-    interface Request {
-      user?: {
-        role: SystemRoleEnum;
-      };
-    }
-  }
-}
-
 interface AuthorizationOptions {
   role?: readonly SystemRoleEnum[];
 }

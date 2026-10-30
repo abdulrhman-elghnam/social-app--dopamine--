@@ -2,10 +2,7 @@ import dotenv from 'dotenv';
 import path from 'node:path';
 
 dotenv.config({
-  path: path.resolve(
-    process.cwd(),
-    `.env.${process.env['NODE_ENV'] || 'dev'}`,
-  ),
+  path: path.resolve(process.cwd(), `.env.${process.env['NODE_ENV'] || 'dev'}`),
 });
 
 export class ConfigService {

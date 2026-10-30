@@ -4,9 +4,7 @@ import { UtilService } from './common/service/utilService.js';
 export class AppService {
   private static instancePromise: Promise<AppService> | undefined;
 
-  private constructor(
-    private readonly utilService: UtilService,
-  ) {}
+  private constructor(private readonly utilService: UtilService) {}
 
   public static getInstance(): Promise<AppService> {
     if (!AppService.instancePromise) {

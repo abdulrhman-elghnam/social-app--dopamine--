@@ -1,21 +1,14 @@
-import type {
-  ErrorRequestHandler,
-  NextFunction,
-  Request,
-  Response,
-} from 'express';
+import type { ErrorRequestHandler, NextFunction, Request, Response } from 'express';
 
-import type { IHandlerFunction } from '../interface/response.interface.js';
-import type { IError } from '../interface/error.interface.js';
+import type { IHandlerFunction } from '../interface/responseInterface.js';
+import type { IError } from '../interface/errorInterface.js';
 
 import { LanguageService } from './languageService.js';
 
 export class UtilService {
   private static instancePromise: Promise<UtilService> | undefined;
 
-  private constructor(
-    private readonly languageService: LanguageService,
-  ) {}
+  private constructor(private readonly languageService: LanguageService) {}
 
   static getInstance(): Promise<UtilService> {
     if (!UtilService.instancePromise) {
@@ -32,11 +25,7 @@ export class UtilService {
   }
 
   public responseFormatter = ({ handler }: IHandlerFunction) => {
-    return async (
-      req: Request,
-      res: Response,
-      next: NextFunction,
-    ): Promise<void> => {
+    return async (req: Request, res: Response, next: NextFunction): Promise<void> => {
       try {
         const result = await handler(req, res, next);
 
@@ -44,10 +33,7 @@ export class UtilService {
 
         const language = req.get('accept-language');
 
-        const message = this.languageService.chooseLanguage(
-          language,
-          result?.messageCode ?? 107,
-        );
+        const message = this.languageService.chooseLanguage(language, result?.messageCode ?? 107);
 
         res.status(result?.status ?? 200).json({
           message: result?.message ?? message,
@@ -60,12 +46,7 @@ export class UtilService {
     };
   };
 
-  public globalErrorHandling: ErrorRequestHandler = (
-    error,
-    req,
-    res,
-    next,
-  ) => {
+  public globalErrorHandling: ErrorRequestHandler = (error, req, res, next) => {
     if (res.headersSent) {
       return next(error);
     }
@@ -91,10 +72,7 @@ export class UtilService {
     const status = normalizedError.statusCode ?? normalizedError.status;
 
     const statusCode =
-      typeof status === 'number' &&
-      Number.isInteger(status) &&
-      status >= 400 &&
-      status <= 599
+      typeof status === 'number' && Number.isInteger(status) && status >= 400 && status <= 599
         ? status
         : 500;
 
@@ -106,10 +84,7 @@ export class UtilService {
 
     const language = req.get('accept-language');
 
-    const errorMessage = this.languageService.chooseLanguage(
-      language,
-      messageCode,
-    );
+    const errorMessage = this.languageService.chooseLanguage(language, messageCode);
 
     return res.status(statusCode).json({
       errorMessage,

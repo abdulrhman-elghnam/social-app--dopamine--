@@ -1,3 +1,5 @@
+import { SystemRoleEnum } from '../value/securityEnum.js';
+
 declare global {
   namespace Express {
     interface Request {
@@ -5,6 +7,9 @@ declare global {
         body: unknown;
         params: unknown;
         query: unknown;
+      };
+      user?: {
+        role: SystemRoleEnum;
       };
     }
   }

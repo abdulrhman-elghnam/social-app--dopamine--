@@ -1,5 +1,5 @@
 import fs from 'node:fs/promises';
-import type { LanguageDictionary } from '../interface/language.interface.js';
+import type { LanguageDictionary } from '../interface/languageInterface.js';
 import { ApiLanguage } from '../value/systemEnum.js';
 
 export class LanguageService {
@@ -37,12 +37,9 @@ export class LanguageService {
 
   chooseLanguage = (
     language: ApiLanguage | string = ApiLanguage.ENGLISH,
-    code: number = 103,
+    code: number = 103
   ): string => {
-const normalizedLanguage = (language.split(',')[0] ?? '')
-  .split(';')[0]
-  ?.trim()
-  .toLowerCase();
+    const normalizedLanguage = (language.split(',')[0] ?? '').split(';')[0]?.trim().toLowerCase();
 
     const messages = normalizedLanguage?.startsWith('ar')
       ? this.arabicLanguage

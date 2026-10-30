@@ -12,9 +12,7 @@ interface ValidationSchema {
 
 type SchemaFactory = (language: string) => ValidationSchema;
 
-export const validationPipe = (
-  schema: SchemaFactory,
-): RequestHandler => {
+export const validationPipe = (schema: SchemaFactory): RequestHandler => {
   return (req, res, next) => {
     try {
       const language = req.get('accept-language') ?? 'en';
@@ -42,7 +40,7 @@ export const validationPipe = (
               code,
               message,
             })),
-          }),
+          })
         );
       }
 
