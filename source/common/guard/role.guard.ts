@@ -1,6 +1,6 @@
 import type { NextFunction, Request, Response } from 'express';
-import { ForbiddenException, UnauthorizedException } from '../exception/mainException.js';
-import { SystemRoleEnum } from '../value/securityEnum.js';
+import { ForbiddenException, UnauthorizedException } from '../exception/main.exception.js';
+import { SystemRoleEnum } from '../value/security.enum.js';
 
 interface AuthorizationOptions {
   role?: readonly SystemRoleEnum[];

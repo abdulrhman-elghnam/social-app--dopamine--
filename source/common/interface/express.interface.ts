@@ -1,4 +1,4 @@
-import { SystemRoleEnum } from '../value/securityEnum.js';
+import { SystemRoleEnum } from '../value/security.enum.js';
 
 declare global {
   namespace Express {

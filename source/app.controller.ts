@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import type { Router as RouterType } from 'express';
-import { AppService } from './appService.js';
-import { UtilService } from './common/service/utilService.js';
+import { AppService } from './app.service.js';
+import { UtilService } from './common/service/util.service.js';
 
 export class AppController {
   public readonly appController: RouterType;

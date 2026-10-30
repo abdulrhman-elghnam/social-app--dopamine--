@@ -1,6 +1,6 @@
-import { UnauthorizedException } from '../exception/mainException.js';
+import { UnauthorizedException } from '../exception/main.exception.js';
 import type { Request, Response, NextFunction } from 'express';
-import { TokenTypeEnum } from '../value/securityEnum.js';
+import { TokenTypeEnum } from '../value/security.enum.js';
 
 export const authenticationGuard = (tokenType = TokenTypeEnum.ACCESS) => {
   return async (req: Request, res: Response, next: NextFunction) => {

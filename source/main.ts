@@ -1,9 +1,9 @@
 import express from 'express';
 import type { Application } from 'express';
-import { AppController } from './appController.js';
-import { AppService } from './appService.js';
-import { UtilService } from './common/service/utilService.js';
-import { ConfigService } from './common/service/configService.js';
+import { AppController } from './app.controller.js';
+import { AppService } from './app.service.js';
+import { UtilService } from './common/service/util.service.js';
+import { ConfigService } from './common/service/config.service.js';
 import helmet from "helmet"
 import morgan from 'morgan';
 const app: Application = express();

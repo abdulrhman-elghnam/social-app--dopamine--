@@ -1,4 +1,4 @@
-import { ApiLanguage } from '../value/systemEnum.js';
+import { ApiLanguage } from '../value/system.enum.js';
 
 export interface ChooseLanguageOptions {
   language?: ApiLanguage | string;

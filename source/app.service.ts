@@ -1,5 +1,5 @@
-import { NotFoundException } from './common/exception/mainException.js';
-import { UtilService } from './common/service/utilService.js';
+import { NotFoundException } from './common/exception/main.exception.js';
+import { UtilService } from './common/service/util.service.js';
 
 export class AppService {
   private static instancePromise: Promise<AppService> | undefined;
