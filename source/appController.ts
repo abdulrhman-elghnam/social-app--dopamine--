@@ -1,15 +1,12 @@
 import { Router } from 'express';
 import type { Router as RouterType } from 'express';
-import { appService, utilService } from './DI/serviceDI.js';
+import { utilService } from './common/service/utilService.js';
+import { appService } from './appService.js';
 
 
 export class AppController {
   public readonly appController: RouterType;
-  private static instance: AppController;
-
-  constructor(
-
-  ) {
+  constructor() {
     this.appController = Router({
       caseSensitive: true,
       strict: true,
@@ -18,18 +15,6 @@ export class AppController {
 
     this.initializeRoutes();
   }
-
-  static getInstance(
-
-    ): AppController {
-        if (!AppController.instance) {
-            this.instance = new AppController(
-            );
-        }
-
-        return AppController.instance;
-    }
-  
 
   private initializeRoutes(): void {
     this.appController.get(
@@ -50,3 +35,5 @@ export class AppController {
     });
   }
 }
+
+export const appController = new AppController();

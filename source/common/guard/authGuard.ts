@@ -2,10 +2,9 @@ import { UnauthorizedException } from '../exception/mainException.js';
 import type { Request, Response, NextFunction } from 'express';
 import { TokenTypeEnum } from '../value/securityEnum.js';
 
-
-export class AuthenticationGuard {
-  constructor(public tokenType: TokenTypeEnum) { }
-  check = () => {
+class AuthenticationGuard {
+  constructor() {}
+  check = (tokenType: TokenTypeEnum) => {
     async (req: Request, res: Response, next: NextFunction) => {
       const authorization = req.headers.authorization;
 
@@ -21,5 +20,6 @@ export class AuthenticationGuard {
       // req.payload = payload;
       next();
     };
-  }
+  };
 }
+export const authenticationGuard = new AuthenticationGuard();

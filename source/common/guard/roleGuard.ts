@@ -3,10 +3,10 @@ import { ForbiddenException, UnauthorizedException } from '../exception/mainExce
 import { SystemRoleEnum } from '../value/securityEnum.js';
 
 export class RoleGuard {
-  constructor(public role: SystemRoleEnum[]) { }
+  constructor() {}
 
-  access = () => {
-    return (req: Request, _res: Response, next: NextFunction) => {
+  access = (role: SystemRoleEnum[]) => {
+    return (req: Request, res: Response, next: NextFunction) => {
       if (!req.user) {
         return next(
           new UnauthorizedException('Authentication required', {
@@ -15,7 +15,7 @@ export class RoleGuard {
         );
       }
 
-      if (this.role.length && !this.role.includes(req.user.role)) {
+      if (role.length && !role.includes(req.user.role)) {
         return next(
           new ForbiddenException('You do not have permission', {
             messageCode: 109,
@@ -25,6 +25,7 @@ export class RoleGuard {
 
       return next();
     };
-  }
+  };
 }
 
+export const roleGuard = new RoleGuard();

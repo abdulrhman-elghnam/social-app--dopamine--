@@ -3,23 +3,10 @@ import type { ErrorRequestHandler, NextFunction, Request, Response } from 'expre
 import type { IHandlerFunction } from '../interface/responseInterface.js';
 import type { IError } from '../interface/errorInterface.js';
 
-import { LanguageService } from './languageService.js';
+import { languageService, LanguageService } from './languageService.js';
 
 export class UtilService {
-  private static instance: Promise<UtilService> | undefined;
-
-  private constructor(private readonly languageService: LanguageService) {}
-
-  static getInstance(): Promise<UtilService> {
-    if (!UtilService.instance) {
-      UtilService.instance = (async () => {
-        const languageService = await LanguageService.getInstance();
-
-        return new UtilService(languageService);
-      })();
-    }
-    return UtilService.instance;
-  }
+  constructor(private readonly languageService: LanguageService) {}
 
   public responseFormatter = ({ handler }: IHandlerFunction) => {
     return async (req: Request, res: Response, next: NextFunction): Promise<void> => {
@@ -89,3 +76,5 @@ export class UtilService {
     });
   };
 }
+
+export const utilService = new UtilService(languageService);

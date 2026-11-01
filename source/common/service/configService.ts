@@ -6,17 +6,7 @@ dotenv.config({
 });
 
 export class ConfigService {
-  private static instance: Promise<ConfigService> | undefined;
-
-  private constructor() {}
-
-  static getInstance(): Promise<ConfigService> {
-    if (!ConfigService.instance) {
-      ConfigService.instance = Promise.resolve(new ConfigService());
-    }
-
-    return ConfigService.instance;
-  }
+  constructor() {}
 
   get(key: string, defaultValue?: string): string | undefined {
     return process.env[key] ?? defaultValue;
@@ -32,3 +22,5 @@ export class ConfigService {
     return value;
   }
 }
+
+export const configService = new ConfigService();

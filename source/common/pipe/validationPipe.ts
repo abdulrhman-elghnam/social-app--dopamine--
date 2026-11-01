@@ -4,7 +4,6 @@ import { z } from 'zod';
 import { BadRequestException } from '../exception/mainException.js';
 import { ApiLanguage } from '../value/systemEnum.js';
 
-
 interface ValidationSchema {
   body?: ZodType;
   params?: ZodType;
@@ -19,7 +18,7 @@ export type Translate = (code: number) => string;
 export class ValidationPipe {
   private static instance: ValidationPipe;
 
-  constructor() { }
+  constructor() {}
 
   static getInstance(): ValidationPipe {
     if (!ValidationPipe.instance) {
@@ -29,12 +28,10 @@ export class ValidationPipe {
     return ValidationPipe.instance;
   }
 
-  schema = (
-    schema: SchemaFactory,
-  ): RequestHandler => {
+  schema = (schema: SchemaFactory): RequestHandler => {
     return (req, res, next) => {
       try {
-        const language  = req.get('accept-language') ?? ApiLanguage.ENGLISH;
+        const language = req.get('accept-language') ?? ApiLanguage.ENGLISH;
         const validationSchema = schema(language as ApiLanguage);
 
         const result = z
@@ -57,14 +54,12 @@ export class ValidationPipe {
           return next(
             new BadRequestException('Validation failed', {
               messageCode: 201,
-              extra: result.error.issues.map(
-                ({ path, code, message }) => ({
-                  path,
-                  code,
-                  message,
-                }),
-              ),
-            }),
+              extra: result.error.issues.map(({ path, code, message }) => ({
+                path,
+                code,
+                message,
+              })),
+            })
           );
         }
 
@@ -84,7 +79,6 @@ export class ValidationPipe {
       }
     };
   };
-
 }
 
 export const generalValidationFields = {
@@ -109,15 +103,11 @@ export const generalValidationFields = {
       .string({ message: t(212) })
       .min(8, { message: t(214) })
       .max(30, { message: t(215) })
-      .regex(
-        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/,
-        { message: t(213) },
-      ),
+      .regex(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/, {
+        message: t(213),
+      }),
 
-  confirmPassword: (t: Translate) =>
-    z
-      .string({ message: t(216) })
-      .min(1, { message: t(216) }),
+  confirmPassword: (t: Translate) => z.string({ message: t(216) }).min(1, { message: t(216) }),
 
   fullName: (t: Translate) =>
     z
@@ -153,7 +143,7 @@ export const generalValidationFields = {
 
           return date >= minDate && date <= today;
         },
-        { message: t(227) },
+        { message: t(227) }
       )
       .refine(
         (date) => {
@@ -162,6 +152,8 @@ export const generalValidationFields = {
 
           return date <= maxDate;
         },
-        { message: t(226) },
+        { message: t(226) }
       ),
 };
+
+export const validationPipe = new ValidationPipe();

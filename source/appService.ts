@@ -1,21 +1,8 @@
 import { NotFoundException } from './common/exception/mainException.js';
-import { UtilService } from './common/service/utilService.js';
+import { utilService, UtilService } from './common/service/utilService.js';
 
 export class AppService {
-  private static instance: Promise<AppService> | undefined;
-
-  private constructor(private readonly utilService: UtilService) {}
-
-  public static getInstance(): Promise<AppService> {
-    if (!AppService.instance) {
-      AppService.instance = (async () => {
-        const utilService = await UtilService.getInstance();
-
-        return new AppService(utilService);
-      })();
-    }
-    return AppService.instance;
-  }
+  constructor(private readonly utilService: UtilService) {}
 
   public mainService() {
     return this.utilService.responseFormatter({
@@ -31,3 +18,5 @@ export class AppService {
     });
   }
 }
+
+export const appService = new AppService(utilService);

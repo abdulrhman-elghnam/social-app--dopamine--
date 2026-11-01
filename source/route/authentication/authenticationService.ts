@@ -1,21 +1,14 @@
-import { z } from "zod";
-import { AuthenticationDTO } from "./authenticationDto.js";
+import { z } from 'zod';
+import { AuthenticationDTO } from './authenticationDto.js';
+import { IHandlerResult } from '../../common/interface/responseInterface.js';
 
 export class AuthenticationService {
-    private static instance: Promise<AuthenticationService> | undefined;
-
-
-    private constructor() { }
-
-    static getInstance(): Promise<AuthenticationService> {
-        if (!AuthenticationService.instance) {
-            AuthenticationService.instance = Promise.resolve(new AuthenticationService());
-        }
-        return AuthenticationService.instance;
-    }
-
-    signup = ({ }: z.infer<ReturnType<AuthenticationDTO['signupDto']>['body']>) => {
-
-    }
-
+  constructor() {}
+  signup = async ({}: z.infer<
+    ReturnType<AuthenticationDTO['signupDTO']>['body']
+  >): Promise<IHandlerResult> => {
+    return {};
+  };
 }
+
+export const authenticationService = new AuthenticationService();
