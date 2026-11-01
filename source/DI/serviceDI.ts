@@ -1,0 +1,21 @@
+import { AppService } from '../appService.js';
+import { CacheService } from '../common/service/cacheService.js';
+import { ConfigService } from '../common/service/configService.js';
+import { LanguageService } from '../common/service/languageService.js';
+import { MailService } from '../common/service/mailService.js';
+import { SecurityService } from '../common/service/securityService.js';
+import { TokenService } from '../common/service/tokenService.js';
+import { UploadService } from '../common/service/uploadService.js';
+import { UtilService } from '../common/service/utilService.js';
+import { AuthenticationService } from '../route/authentication/authenticationService.js';
+
+export const languageService = await LanguageService.getInstance();
+export const configService = await ConfigService.getInstance();
+export const utilService = await UtilService.getInstance();
+export const appService = await AppService.getInstance();
+export const cacheService = await CacheService.getInstance();
+export const mailService = await MailService.getInstance();
+export const securityService = await SecurityService.getInstance();
+export const tokenService = await TokenService.getInstance();
+export const uploadService = await UploadService.getInstance();
+export const authenticationService = await AuthenticationService.getInstance();

@@ -3,7 +3,7 @@ import type { LanguageDictionary } from '../interface/languageInterface.js';
 import { ApiLanguage } from '../value/systemEnum.js';
 
 export class LanguageService {
-  private static instancePromise: Promise<LanguageService> | undefined;
+  private static instance: Promise<LanguageService> | undefined;
 
   private arabicLanguage!: LanguageDictionary;
   private englishLanguage!: LanguageDictionary;
@@ -11,28 +11,25 @@ export class LanguageService {
   private constructor() {}
 
   static getInstance(): Promise<LanguageService> {
-    if (!LanguageService.instancePromise) {
-      LanguageService.instancePromise = LanguageService.createInstance();
+    if (!LanguageService.instance) {
+      LanguageService.instance = (async () => {
+        const instance = new LanguageService();
+        const getLanguage = (language: string) =>
+          new URL(`../../i18n/${language}.json`, import.meta.url);
+
+        const [arabic, english] = await Promise.all([
+          fs.readFile(getLanguage('ar'), 'utf-8'),
+          fs.readFile(getLanguage('en'), 'utf-8'),
+        ]);
+
+        instance.arabicLanguage = JSON.parse(arabic);
+        instance.englishLanguage = JSON.parse(english);
+
+        return instance;
+      })();
     }
 
-    return LanguageService.instancePromise;
-  }
-
-  private static async createInstance(): Promise<LanguageService> {
-    const instance = new LanguageService();
-
-    const getLanguage = (language: string) =>
-      new URL(`../../i18n/${language}.json`, import.meta.url);
-
-    const [arabic, english] = await Promise.all([
-      fs.readFile(getLanguage('ar'), 'utf-8'),
-      fs.readFile(getLanguage('en'), 'utf-8'),
-    ]);
-
-    instance.arabicLanguage = JSON.parse(arabic);
-    instance.englishLanguage = JSON.parse(english);
-
-    return instance;
+    return LanguageService.instance;
   }
 
   chooseLanguage = (

@@ -1,11 +1,11 @@
 export class UploadService {
-  private static instance: UploadService;
+  private static instance: Promise<UploadService> | undefined;
 
   private constructor() {}
 
-  static getInstance(): UploadService {
+  static getInstance(): Promise<UploadService> {
     if (!UploadService.instance) {
-      UploadService.instance = new UploadService();
+      UploadService.instance = Promise.resolve(new UploadService());
     }
     return UploadService.instance;
   }

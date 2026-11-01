@@ -1,14 +1,14 @@
 import { Router } from 'express';
 import type { Router as RouterType } from 'express';
-import { AppService } from './appService.js';
-import { UtilService } from './common/service/utilService.js';
+import { appService, utilService } from './DI/serviceDI.js';
+
 
 export class AppController {
   public readonly appController: RouterType;
+  private static instance: AppController;
 
   constructor(
-    private readonly appService: AppService,
-    private readonly utilService: UtilService
+
   ) {
     this.appController = Router({
       caseSensitive: true,
@@ -19,10 +19,22 @@ export class AppController {
     this.initializeRoutes();
   }
 
+  static getInstance(
+
+    ): AppController {
+        if (!AppController.instance) {
+            this.instance = new AppController(
+            );
+        }
+
+        return AppController.instance;
+    }
+  
+
   private initializeRoutes(): void {
     this.appController.get(
       '/',
-      this.utilService.responseFormatter({
+      utilService.responseFormatter({
         handler: () => ({
           messageCode: 101,
         }),
@@ -31,7 +43,7 @@ export class AppController {
 
     this.appController.use((req, res, next) => {
       try {
-        this.appService.notFoundService();
+        appService.notFoundService();
       } catch (error) {
         next(error);
       }

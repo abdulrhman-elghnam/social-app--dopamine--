@@ -2,20 +2,24 @@ import { UnauthorizedException } from '../exception/mainException.js';
 import type { Request, Response, NextFunction } from 'express';
 import { TokenTypeEnum } from '../value/securityEnum.js';
 
-export const authenticationGuard = (tokenType = TokenTypeEnum.ACCESS) => {
-  return async (req: Request, res: Response, next: NextFunction) => {
-    const authorization = req.headers.authorization;
 
-    if (!authorization) {
-      throw new UnauthorizedException('Authentication required', {
-        messageCode: 109,
-      });
-    }
+export class AuthenticationGuard {
+  constructor(public tokenType: TokenTypeEnum) { }
+  check = () => {
+    async (req: Request, res: Response, next: NextFunction) => {
+      const authorization = req.headers.authorization;
 
-    // const { user, payload } = await decodeToken({ authorization, tokenType });
+      if (!authorization) {
+        throw new UnauthorizedException('Authentication required', {
+          messageCode: 109,
+        });
+      }
 
-    // req.user = user;
-    // req.payload = payload;
-    next();
-  };
-};
+      // const { user, payload } = await decodeToken({ authorization, tokenType });
+
+      // req.user = user;
+      // req.payload = payload;
+      next();
+    };
+  }
+}

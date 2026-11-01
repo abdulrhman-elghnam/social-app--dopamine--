@@ -1,11 +1,11 @@
 export class CacheService {
-  private static instance: CacheService;
+  private static instance: Promise<CacheService> | undefined;
 
   private constructor() {}
 
-  static getInstance(): CacheService {
+  static getInstance(): Promise<CacheService> {
     if (!CacheService.instance) {
-      CacheService.instance = new CacheService();
+      CacheService.instance = Promise.resolve(new CacheService());
     }
     return CacheService.instance;
   }

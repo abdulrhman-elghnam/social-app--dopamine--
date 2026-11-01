@@ -6,31 +6,26 @@ import type { IError } from '../interface/errorInterface.js';
 import { LanguageService } from './languageService.js';
 
 export class UtilService {
-  private static instancePromise: Promise<UtilService> | undefined;
+  private static instance: Promise<UtilService> | undefined;
 
   private constructor(private readonly languageService: LanguageService) {}
 
   static getInstance(): Promise<UtilService> {
-    if (!UtilService.instancePromise) {
-      UtilService.instancePromise = UtilService.createInstance();
+    if (!UtilService.instance) {
+      UtilService.instance = (async () => {
+        const languageService = await LanguageService.getInstance();
+
+        return new UtilService(languageService);
+      })();
     }
-
-    return UtilService.instancePromise;
-  }
-
-  private static async createInstance(): Promise<UtilService> {
-    const languageService = await LanguageService.getInstance();
-
-    return new UtilService(languageService);
+    return UtilService.instance;
   }
 
   public responseFormatter = ({ handler }: IHandlerFunction) => {
     return async (req: Request, res: Response, next: NextFunction): Promise<void> => {
       try {
         const result = await handler(req, res, next);
-
         if (res.headersSent) return;
-
         const language = req.get('accept-language');
 
         const message = this.languageService.chooseLanguage(language, result?.messageCode ?? 107);

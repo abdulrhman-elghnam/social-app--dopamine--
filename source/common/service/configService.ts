@@ -6,13 +6,13 @@ dotenv.config({
 });
 
 export class ConfigService {
-  private static instance: ConfigService;
+  private static instance: Promise<ConfigService> | undefined;
 
   private constructor() {}
 
-  static getInstance(): ConfigService {
+  static getInstance(): Promise<ConfigService> {
     if (!ConfigService.instance) {
-      ConfigService.instance = new ConfigService();
+      ConfigService.instance = Promise.resolve(new ConfigService());
     }
 
     return ConfigService.instance;

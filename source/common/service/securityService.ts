@@ -1,11 +1,11 @@
 export class SecurityService {
-  private static instance: SecurityService;
+  private static instance: Promise<SecurityService> | undefined;
 
   private constructor() {}
 
-  static getInstance(): SecurityService {
+  static getInstance(): Promise<SecurityService> {
     if (!SecurityService.instance) {
-      SecurityService.instance = new SecurityService();
+      SecurityService.instance = Promise.resolve(new SecurityService());
     }
     return SecurityService.instance;
   }

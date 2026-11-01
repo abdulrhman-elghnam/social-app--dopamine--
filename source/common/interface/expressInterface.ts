@@ -7,7 +7,11 @@ declare global {
         body: unknown;
         params: unknown;
         query: unknown;
+        file: unknown;
+        files: unknown;
       };
+      file?: unknown;
+      files?: unknown;
       user?: {
         role: SystemRoleEnum;
       };
