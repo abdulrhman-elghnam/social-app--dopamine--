@@ -10,6 +10,7 @@ import { databaseService } from './dependencies/service/database.service.js';
 
 import { configService } from './dependencies/service/config.service.js';
 import { authController } from './module/auth/auth.controller.js';
+import { cacheService } from './dependencies/service/cache.service.js';
 
 
 
@@ -21,14 +22,17 @@ app.use(appController.appController);
 app.use('/authentication', authController.authenticationController);
 
 class Server {
-  constructor() {}
+  constructor() { }
   public run = async () => {
-    await databaseService.connect();
+    await Promise.all([
+      databaseService.connect(),
+      cacheService.connect(),
+    ]);
     const port = configService.get('PORT');
 
     app.listen(port, () => {
       app.use(utilService.globalErrorHandling);
-      console.log(`Server is running on port ${port}`);
+      console.log({ server: `running on http://localhost:${port}` });
     });
   };
 }

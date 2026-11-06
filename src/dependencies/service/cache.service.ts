@@ -22,6 +22,26 @@ export class CacheService {
     this.client = new Redis(configService.getOrThrow('REDIS_URI'));
   }
 
+  connect(): Promise<void> {
+    return new Promise((resolve, reject) => {
+      this.client.on('connect', () => {
+        console.log({cache : `Connected to Redis`});
+        resolve();
+      });
+    this.client.on('error', (err) => {
+      console.error({cache : `Redis error: ${err}`});
+      reject(err);  
+    });
+    this.client.on('close', () => {
+      console.log({cache : `Redis connection closed`});
+    });
+    this.client.on('reconnecting', () => {
+      console.log({cache : `Reconnecting to Redis...`});
+    });
+    this.client.on('end', () => {
+      console.log({cache : `Redis connection ended`});
+    });
+  });}
   private serialize(value: unknown): string {
     const json = JSON.stringify(value);
     if (json === undefined) {
@@ -68,6 +88,26 @@ export class CacheService {
   async getAndDelete<T>(key: string): Promise<T | null> {
     const value = await this.client.getdel(key);
     return value === null ? null : this.deserialize<T>(value);
+  }
+
+  async increment(key: string): Promise<number> {
+    return this.client.incr(key);
+  }
+
+  async decrement(key: string): Promise<number> {
+    return this.client.decr(key);
+  }
+
+  async exists(key: string): Promise<boolean> {
+    return (await this.client.exists(key)) === 1;
+  }
+
+  async expire(key: string, seconds: number): Promise<boolean> {
+    return (await this.client.expire(key, seconds)) === 1;
+  }
+
+  async timeToLive(key: string): Promise<number> {
+    return this.client.ttl(key);
   }
 
   async deleteCache(key: string): Promise<number> {

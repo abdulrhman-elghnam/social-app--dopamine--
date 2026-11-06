@@ -2,8 +2,6 @@
 import { Types } from 'mongoose';
 import { GenderEnum, MediaTypeEnum, NotificationTypeEnum, PostVisibilityEnum, ProviderEnum, SystemRoleEnum } from '../value/databaseEnum.js';
 
-
-
 export interface IUser {
   _id?: Types.ObjectId;
 
@@ -118,15 +116,6 @@ export interface IStory {
   createdAt?: Date;
 }
 
-
-export interface IStoryView {
-  _id?: Types.ObjectId;
-
-  story: Types.ObjectId;
-  viewer: Types.ObjectId;
-
-  viewedAt: Date;
-}
 
 
 export interface INotification {
