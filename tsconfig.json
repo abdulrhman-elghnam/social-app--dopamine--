@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "rootDir": "./source",
+    "rootDir": "./src",
     "outDir": "./dist",
     "module": "nodenext",
     "target": "esnext",
@@ -28,6 +28,6 @@
     "moduleDetection": "force",
     "skipLibCheck": true
   },
-  "include": ["source/**/*.ts"],
+  "include": ["src/**/*.ts"],
   "exclude": ["node_modules", "dist"]
 }
