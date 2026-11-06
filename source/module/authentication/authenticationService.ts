@@ -28,6 +28,12 @@ export class AuthenticationService {
     return { status: 201, messageCode: 104 };
   };
 
+  changePassword = async ({ }: z.infer<
+    ReturnType<AuthenticationDTO['googleSignUpDTO']>['body']
+  >): Promise<IHandlerResult> => {
+    return { status: 201, messageCode: 104 };
+  };
+
   verifyForgotPassword = async ({ }: z.infer<
     ReturnType<AuthenticationDTO['googleSignUpDTO']>['body']
   >): Promise<IHandlerResult> => {
