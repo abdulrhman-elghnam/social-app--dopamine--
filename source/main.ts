@@ -6,6 +6,7 @@ import { appController } from './appController.js';
 import { authController } from './route/authentication/authenticationController.js';
 import { configService } from './common/service/configService.js';
 import { utilService } from './common/service/utilService.js';
+import { databaseService } from './common/service/databaseService.js';
 
 const app: Application = express();
 
@@ -16,8 +17,10 @@ app.use('/authentication', authController.authenticationController);
 
 class Server {
   constructor() {}
-  public run = () => {
+  public run = async () => {
+    await databaseService.connect();
     const port = configService.get('PORT');
+
     app.listen(port, () => {
       app.use(utilService.globalErrorHandling);
       console.log(`Server is running on port ${port}`);

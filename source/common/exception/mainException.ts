@@ -1,5 +1,5 @@
-import { IAppErrorOptions } from '../interface/errorInterface.js';
-import { AppError } from './appException.js';
+
+import { AppError, IAppErrorOptions } from './appException.js';
 
 export class BadRequestException extends AppError {
   constructor(message = 'Bad request', options: IAppErrorOptions = {}) {

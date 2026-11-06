@@ -1,9 +1,23 @@
 import type { ErrorRequestHandler, NextFunction, Request, Response } from 'express';
 
-import type { IHandlerFunction } from '../interface/responseInterface.js';
-import type { IError } from '../interface/errorInterface.js';
-
 import { languageService, LanguageService } from './languageService.js';
+import { IError } from '../exception/appException.js';
+
+export interface IHandlerResult {
+  status?: number;
+  message?: string;
+  messageCode?: number;
+  data?: unknown;
+  meta?: unknown;
+}
+
+export interface IHandlerFunction {
+  handler: (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) => IHandlerResult | void | Promise<IHandlerResult | void>;
+}
 
 export class UtilService {
   constructor(private readonly languageService: LanguageService) {}

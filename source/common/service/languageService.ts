@@ -1,6 +1,12 @@
 import fs from 'node:fs/promises';
-import type { LanguageDictionary } from '../interface/languageInterface.js';
 import { ApiLanguage } from '../value/systemEnum.js';
+
+export interface ChooseLanguageOptions {
+  language?: ApiLanguage | string;
+  code?: number;
+}
+
+export type LanguageDictionary = Record<string, string>;
 
 export class LanguageService {
   private arabicLanguage!: LanguageDictionary;

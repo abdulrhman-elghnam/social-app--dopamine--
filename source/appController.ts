@@ -3,7 +3,6 @@ import type { Router as RouterType } from 'express';
 import { utilService } from './common/service/utilService.js';
 import { appService } from './appService.js';
 
-
 export class AppController {
   public readonly appController: RouterType;
   constructor() {
