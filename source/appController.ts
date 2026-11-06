@@ -19,9 +19,11 @@ export class AppController {
     this.appController.get(
       '/',
       utilService.responseFormatter({
-        handler: () => ({
-          messageCode: 101,
-        }),
+        handler: async () => {
+          return {
+            messageCode: 101,
+          };
+        },
       })
     );
 

@@ -13,13 +13,17 @@ export interface SendEmailOptions {
 }
 
 const escapeHtml = (value: string): string =>
-  value.replace(/[&<>"']/g, (character) => ({
-    '&': '&amp;',
-    '<': '&lt;',
-    '>': '&gt;',
-    '"': '&quot;',
-    "'": '&#039;',
-  })[character] ?? character);
+  value.replace(
+    /[&<>"']/g,
+    (character) =>
+      ({
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        '"': '&quot;',
+        "'": '&#039;',
+      })[character] ?? character
+  );
 
 export class MailService {
   private readonly transporter: Transporter<SentMessageInfo>;
@@ -72,7 +76,6 @@ export const verifyEmailTemplate = ({ otp, email }: { otp: number; email: string
 </body>
 </html>
 `;
-
 
 export const forgotPasswordTemplate = ({ otp, email }: { otp: number; email: string }) => `
 <!DOCTYPE html>

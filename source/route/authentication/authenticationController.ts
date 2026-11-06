@@ -27,6 +27,36 @@ export class AuthenticationController {
         },
       })
     );
+
+    this.authenticationController.post(
+      '/login',
+      validationPipe.schema(authenticationDTO.loginDTO),
+      utilService.responseFormatter({
+        handler: (req: Request, res: Response, next: NextFunction) => {
+          return authenticationService.login(req.body);
+        },
+      })
+    );
+
+    this.authenticationController.post(
+      '/google-signup',
+      validationPipe.schema(authenticationDTO.googleSignUpDTO),
+      utilService.responseFormatter({
+        handler: (req: Request, res: Response, next: NextFunction) => {
+          return authenticationService.googleCredential(req.body);
+        },
+      })
+    );
+
+    this.authenticationController.post(
+      '/verify-otp',
+      validationPipe.schema(authenticationDTO.otpDTO),
+      utilService.responseFormatter({
+        handler: (req: Request, res: Response, next: NextFunction) => {
+          return authenticationService.verifyOtp(req.body);
+        },
+      })
+    );
   }
 }
 

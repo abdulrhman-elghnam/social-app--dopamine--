@@ -154,6 +154,17 @@ export const generalValidationFields = {
         },
         { message: t(226) }
       ),
+  otp: (t: Translate) =>
+    z
+      .string({ message: t(235) })
+      .trim()
+      .regex(/^\d{6}$/, { message: t(236) }),
+
+  idToken: (t: Translate) =>
+    z
+      .string({ message: t(234) })
+      .trim()
+      .min(1, { message: t(234) }),
 };
 
 export const validationPipe = new ValidationPipe();
