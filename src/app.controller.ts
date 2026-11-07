@@ -4,9 +4,9 @@ import { utilService } from './dependencies/service/util.service.js';
 import { appService } from './app.service.js';
 
 export class AppController {
-  public readonly appController: RouterType;
+  public readonly route: RouterType;
   constructor() {
-    this.appController = Router({
+    this.route = Router({
       caseSensitive: true,
       strict: true,
       mergeParams: true,
@@ -16,7 +16,7 @@ export class AppController {
   }
 
   private initializeRoutes(): void {
-    this.appController.get(
+    this.route.get(
       '/',
       utilService.responseFormatter({
         handler: async () => {
@@ -27,7 +27,7 @@ export class AppController {
       })
     );
 
-    this.appController.use((req, res, next) => {
+    this.route.use((req, res, next) => {
       try {
         appService.notFoundService();
       } catch (error) {

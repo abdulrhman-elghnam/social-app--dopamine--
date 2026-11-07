@@ -17,8 +17,8 @@ export class LanguageService {
   public async loadLanguages(): Promise<void> {
     const readLanguage = async (language: string): Promise<string> => {
       const locations = [
-        new URL(`../../i18n/${language}.json`, import.meta.url),
-        new URL(`../../../source/i18n/${language}.json`, import.meta.url),
+        new URL(`../../../dist/i18n/${language}.json`, import.meta.url),
+        new URL(`../../../src/i18n/${language}.json`, import.meta.url),
       ];
 
       let lastError: unknown;

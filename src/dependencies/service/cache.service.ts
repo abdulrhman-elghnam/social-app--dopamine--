@@ -24,13 +24,17 @@ export class CacheService {
 
   connect(): Promise<void> {
     return new Promise((resolve, reject) => {
-      this.client.on('connect', () => {
+      let settled = false;
+      const resolveConnected = () => {
+        if (settled) return;
+        settled = true;
         console.log({ cache: `Connected to Redis` });
         resolve();
-      });
+      };
+      this.client.on('ready', resolveConnected);
       this.client.on('error', (err) => {
         console.error({ cache: `Redis error: ${err}` });
-        reject(err);
+        if (!settled) reject(err);
       });
       this.client.on('close', () => {
         console.log({ cache: `Redis connection closed` });
@@ -41,6 +45,8 @@ export class CacheService {
       this.client.on('end', () => {
         console.log({ cache: `Redis connection ended` });
       });
+
+      if (this.client.status === 'ready') resolveConnected();
     });
   }
   private serialize(value: unknown): string {
