@@ -1,7 +1,8 @@
 import type { ErrorRequestHandler, NextFunction, Request, Response } from 'express';
 
-import { languageService, LanguageService } from './language.service.js';
+import { languageService } from './language.service.js';
 import { IError } from '../exception/app.exception.js';
+import { randomInt } from 'crypto';
 
 export interface IHandlerResult {
   status?: number;
@@ -20,7 +21,17 @@ export interface IHandlerFunction {
 }
 
 export class UtilService {
-  constructor(private readonly languageService: LanguageService) {}
+  constructor() { }
+
+  createOtp = () => randomInt(100000, 1000000);
+
+  splitFullName = (fullName: string) => {
+    const [firstName, ...rest] = fullName.trim().split(/\s+/);
+    return {
+      firstName: firstName ?? fullName,
+      lastName: rest.join(' ') || firstName || fullName,
+    };
+  };
 
   public responseFormatter = ({ handler }: IHandlerFunction) => {
     return async (req: Request, res: Response, next: NextFunction): Promise<void> => {
@@ -29,7 +40,7 @@ export class UtilService {
         if (res.headersSent) return;
         const language = req.get('accept-language');
 
-        const message = this.languageService.chooseLanguage(language, result?.messageCode ?? 107);
+        const message = languageService.chooseLanguage(language, result?.messageCode ?? 107);
 
         res.status(result?.status ?? 200).json({
           message: result?.message ?? message,
@@ -74,13 +85,13 @@ export class UtilService {
 
     const messageCode =
       typeof normalizedError.messageCode === 'number' &&
-      Number.isInteger(normalizedError.messageCode)
+        Number.isInteger(normalizedError.messageCode)
         ? normalizedError.messageCode
         : (statusMessageCodes[statusCode] ?? 103);
 
     const language = req.get('accept-language');
 
-    const errorMessage = this.languageService.chooseLanguage(language, messageCode);
+    const errorMessage =  languageService.chooseLanguage(language, messageCode);
 
     return res.status(statusCode).json({
       errorMessage,
@@ -91,4 +102,4 @@ export class UtilService {
   };
 }
 
-export const utilService = new UtilService(languageService);
+export const utilService = new UtilService();

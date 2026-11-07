@@ -7,10 +7,10 @@ import { authDTO } from './dto/auth.dto.js';
 import { authService } from './auth.service.js';
 
 export class AuthenticationController {
-  public readonly authenticationController: RouterType;
+  public readonly route: RouterType;
 
   constructor() {
-    this.authenticationController = Router({
+    this.route = Router({
       caseSensitive: true,
       strict: true,
       mergeParams: true,
@@ -20,17 +20,19 @@ export class AuthenticationController {
   }
 
   private initializeRoutes(): void {
-    this.authenticationController.post(
+    this.route.post(
       '/signup',
       validationPipe.schema(authDTO.signupDTO),
       utilService.responseFormatter({
         handler: (req: Request, _res: Response, _next: NextFunction) => {
+          console.log("test");
+
           return authService.signup(req.body);
         },
       })
     );
 
-    this.authenticationController.post(
+    this.route.post(
       '/login',
       validationPipe.schema(authDTO.loginDTO),
       utilService.responseFormatter({
@@ -40,7 +42,7 @@ export class AuthenticationController {
       })
     );
 
-    this.authenticationController.post(
+    this.route.post(
       '/google-signup',
       validationPipe.schema(authDTO.googleSignUpDTO),
       utilService.responseFormatter({
@@ -50,7 +52,7 @@ export class AuthenticationController {
       })
     );
 
-    this.authenticationController.post(
+    this.route.post(
       '/verify-otp',
       validationPipe.schema(authDTO.otpDTO),
       utilService.responseFormatter({
@@ -59,7 +61,31 @@ export class AuthenticationController {
         },
       })
     );
+
+    this.route.post(
+      '/forgot-password',
+      validationPipe.schema(authDTO.emailDTO),
+      utilService.responseFormatter({
+        handler: (req: Request) => authService.requestForgetPassword(req.body),
+      })
+    );
+
+    this.route.post(
+      '/verify-forgot-password',
+      validationPipe.schema(authDTO.otpDTO),
+      utilService.responseFormatter({
+        handler: (req: Request) => authService.verifyForgotPassword(req.body),
+      })
+    );
+
+    this.route.post(
+      '/change-password',
+      validationPipe.schema(authDTO.changePasswordDTO),
+      utilService.responseFormatter({
+        handler: (req: Request) => authService.changePassword(req.body),
+      })
+    );
   }
 }
 
-export const authController = new AuthenticationController();
+export const authenticationController = new AuthenticationController();
