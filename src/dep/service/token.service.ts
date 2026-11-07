@@ -6,7 +6,7 @@ import {
   ConflictException,
   UnauthorizedException,
 } from '../exception/main.exception.js';
-import { SystemRoleEnum, TokenTypeEnum } from '../value/securityEnum.js';
+import { SystemRoleEnum, TokenTypeEnum } from '../value/security.enum.js';
 import { cacheService, RedisKeys } from './cache.service.js';
 import { configService } from './config.service.js';
 

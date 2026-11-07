@@ -1,6 +1,6 @@
 import { UnauthorizedException } from '../exception/main.exception.js';
 import type { Request, Response, NextFunction } from 'express';
-import { TokenTypeEnum } from '../value/securityEnum.js';
+import { TokenTypeEnum } from '../value/security.enum.js';
 import { tokenService } from '../service/token.service.js';
 
 class AuthGuard {

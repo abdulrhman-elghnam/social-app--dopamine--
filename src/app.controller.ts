@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import type { Router as RouterType } from 'express';
-import { utilService } from './dependencies/service/util.service.js';
+import { utilService } from './dep/service/util.service.js';
 import { appService } from './app.service.js';
 
 export class AppController {

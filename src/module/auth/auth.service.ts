@@ -1,20 +1,20 @@
 import { z } from 'zod';
-import { IHandlerResult, utilService } from '../../dependencies/service/util.service.js';
+import { IHandlerResult, utilService } from '../../dep/service/util.service.js';
 import { AuthDTO } from './dto/auth.dto.js';
-import { userRepository } from '../../database/repository/user.repository.js';
-import { cacheService, RedisKeys } from '../../dependencies/service/cache.service.js';
-import { securityService } from '../../dependencies/service/security.service.js';
-import { tokenService } from '../../dependencies/service/token.service.js';
-import { googleService } from '../../dependencies/service/google.service.js';
-import { mailEvent } from '../../dependencies/event/mail.event.js';
+import { userRepository } from '../../db/repo/user.repository.js';
+import { cacheService, RedisKeys } from '../../dep/service/cache.service.js';
+import { securityService } from '../../dep/service/security.service.js';
+import { tokenService } from '../../dep/service/token.service.js';
+import { googleService } from '../../dep/service/google.service.js';
+import { mailEvent } from '../../dep/event/mail.event.js';
 import {
   BadRequestException,
   ConflictException,
   NotFoundException,
   UnauthorizedException,
-} from '../../dependencies/exception/main.exception.js';
-import { GenderEnum, ProviderEnum, SystemRoleEnum } from '../../dependencies/value/databaseEnum.js';
-import { SystemRoleEnum as TokenRoleEnum } from '../../dependencies/value/securityEnum.js';
+} from '../../dep/exception/main.exception.js';
+import { GenderEnum, ProviderEnum, SystemRoleEnum } from '../../dep/value/database.enum.js';
+import { SystemRoleEnum as TokenRoleEnum } from '../../dep/value/security.enum.js';
 
 export class AuthService {
   constructor() {}

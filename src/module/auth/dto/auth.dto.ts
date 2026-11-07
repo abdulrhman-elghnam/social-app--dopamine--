@@ -1,7 +1,8 @@
 import { z } from 'zod';
-import { ApiLanguage } from '../../../dependencies/value/systemEnum.js';
-import { languageService } from '../../../dependencies/service/language.service.js';
-import { generalValidationFields } from '../../../dependencies/pipe/validation.pipe.js';
+
+import { languageService } from '../../../dep/service/language.service.js';
+import { generalValidationFields } from '../../../dep/pipe/validation.pipe.js';
+import { ApiLanguage } from '../../../dep/value/system.enum.js';
 
 export class AuthDTO {
   constructor() {}

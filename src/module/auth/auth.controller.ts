@@ -1,8 +1,8 @@
 import { Router } from 'express';
 import type { Request, Response, NextFunction, Router as RouterType } from 'express';
-import { validationPipe } from '../../dependencies/pipe/validation.pipe.js';
+import { validationPipe } from '../../dep/pipe/validation.pipe.js';
 
-import { utilService } from '../../dependencies/service/util.service.js';
+import { utilService } from '../../dep/service/util.service.js';
 import { authDTO } from './dto/auth.dto.js';
 import { authService } from './auth.service.js';
 

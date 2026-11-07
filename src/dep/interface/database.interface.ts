@@ -6,7 +6,7 @@ import {
   PostVisibilityEnum,
   ProviderEnum,
   SystemRoleEnum,
-} from '../value/databaseEnum.js';
+} from '../value/database.enum.js';
 
 export interface IUser {
   _id?: Types.ObjectId;

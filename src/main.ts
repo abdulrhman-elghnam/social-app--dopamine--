@@ -4,12 +4,12 @@ import helmet from 'helmet';
 import morgan from 'morgan';
 import { fileURLToPath } from 'node:url';
 import { appController } from './app.controller.js';
-import { utilService } from './dependencies/service/util.service.js';
-import { databaseService } from './dependencies/service/database.service.js';
-import { configService } from './dependencies/service/config.service.js';
+import { utilService } from './dep/service/util.service.js';
+import { databaseService } from './dep/service/database.service.js';
+import { configService } from './dep/service/config.service.js';
 import { authenticationController } from './module/auth/auth.controller.js';
-import { cacheService } from './dependencies/service/cache.service.js';
-import { limiterGuard } from './dependencies/guard/limiter.guard.js';
+import { cacheService } from './dep/service/cache.service.js';
+import { limiterGuard } from './dep/guard/limiter.guard.js';
 
 const app: Application = express();
 

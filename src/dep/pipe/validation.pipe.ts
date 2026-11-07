@@ -2,7 +2,7 @@ import type { RequestHandler } from 'express';
 import type { ZodType } from 'zod';
 import { z } from 'zod';
 import { BadRequestException } from '../exception/main.exception.js';
-import { ApiLanguage } from '../value/systemEnum.js';
+import { ApiLanguage } from '../value/system.enum.js';
 
 interface ValidationSchema {
   body?: ZodType;

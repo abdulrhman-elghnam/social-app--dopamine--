@@ -1,7 +1,7 @@
 import { DatabaseRepository } from './base.repository.js';
-import type { IUser } from '../../dependencies/interface/databaseInterface.js';
 import { UserModel } from '../model/user.model.js';
-import { HydratedDocument } from 'mongoose';
+import type { HydratedDocument } from 'mongoose';
+import type { IUser } from '../../dep/interface/database.interface.js';
 
 export class UserRepository extends DatabaseRepository<IUser> {
   constructor() {

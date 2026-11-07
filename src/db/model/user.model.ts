@@ -1,7 +1,7 @@
 import { model, Schema } from 'mongoose';
-import { GenderEnum, ProviderEnum, SystemRoleEnum } from '../../dependencies/value/databaseEnum.js';
-import type { IUser } from '../../dependencies/interface/databaseInterface.js';
-import { securityService } from '../../dependencies/service/security.service.js';
+import { GenderEnum, ProviderEnum, SystemRoleEnum } from '../../dep/value/database.enum.js';
+import type { IUser } from '../../dep/interface/database.interface.js';
+import { securityService } from '../../dep/service/security.service.js';
 
 const userSchema = new Schema<IUser>(
   {
@@ -26,9 +26,9 @@ const userSchema = new Schema<IUser>(
 );
 
 userSchema.pre('save', async function hashPassword() {
-  if (this.isModified('password') && this.password) {
-    this.password = await securityService.hash(this.password);
-    this.changeCredentialsTime = new Date();
+  if (this.isModified('password') && this['password']) {
+    this['password'] = await securityService.hash(this['password']);
+    this['changeCredentialsTime'] = new Date();
   }
 });
 

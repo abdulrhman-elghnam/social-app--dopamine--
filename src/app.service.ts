@@ -1,5 +1,5 @@
-import { NotFoundException } from './dependencies/exception/main.exception.js';
-import { utilService, UtilService } from './dependencies/service/util.service.js';
+import { NotFoundException } from './dep/exception/main.exception.js';
+import { utilService, UtilService } from './dep/service/util.service.js';
 
 export class AppService {
   constructor(private readonly utilService: UtilService) {}

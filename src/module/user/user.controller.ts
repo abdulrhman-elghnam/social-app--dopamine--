@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import type { Request, Response, NextFunction, Router as RouterType } from 'express';
-import { limiterGuard } from '../../dependencies/guard/limiter.guard.js';
+import { limiterGuard } from '../../dep/guard/limiter.guard.js';
+
 
 class UserController {
   public readonly route: RouterType;
