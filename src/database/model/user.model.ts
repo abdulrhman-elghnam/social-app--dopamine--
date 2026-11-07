@@ -1,9 +1,5 @@
 import { model, Schema } from 'mongoose';
-import {
-  GenderEnum,
-  ProviderEnum,
-  SystemRoleEnum,
-} from '../../dependencies/value/databaseEnum.js';
+import { GenderEnum, ProviderEnum, SystemRoleEnum } from '../../dependencies/value/databaseEnum.js';
 import type { IUser } from '../../dependencies/interface/databaseInterface.js';
 import { securityService } from '../../dependencies/service/security.service.js';
 

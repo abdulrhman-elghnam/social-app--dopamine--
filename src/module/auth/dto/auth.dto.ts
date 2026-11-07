@@ -1,5 +1,4 @@
 import { z } from 'zod';
-
 import { ApiLanguage } from '../../../dependencies/value/systemEnum.js';
 import { languageService } from '../../../dependencies/service/language.service.js';
 import { generalValidationFields } from '../../../dependencies/pipe/validation.pipe.js';
@@ -34,33 +33,33 @@ export class AuthDTO {
   };
 
   emailDTO = (language: ApiLanguage) => {
-      const t = (code: number) => languageService.chooseLanguage(language, code);
+    const t = (code: number) => languageService.chooseLanguage(language, code);
 
-      return {
-        body: z.object({
-          email: generalValidationFields.email(t),
-        }),
-        params: z.object({}),
-        query: z.object({}),
-      };
+    return {
+      body: z.object({
+        email: generalValidationFields.email(t),
+      }),
+      params: z.object({}),
+      query: z.object({}),
+    };
   };
 
   changePasswordDTO = (language: ApiLanguage) => {
-      const t = (code: number) => languageService.chooseLanguage(language, code);
+    const t = (code: number) => languageService.chooseLanguage(language, code);
 
-      return {
-        body: z
-          .object({
-            email: generalValidationFields.email(t),
-            password: generalValidationFields.password(t),
-            confirmPassword: generalValidationFields.confirmPassword(t),
-          })
-          .refine((data) => data.password === data.confirmPassword, {
-            path: ['confirmPassword'],
-            message: t(250),
-          }),
-        params: z.object({}),
-        query: z.object({}),
+    return {
+      body: z
+        .object({
+          email: generalValidationFields.email(t),
+          password: generalValidationFields.password(t),
+          confirmPassword: generalValidationFields.confirmPassword(t),
+        })
+        .refine((data) => data.password === data.confirmPassword, {
+          path: ['confirmPassword'],
+          message: t(250),
+        }),
+      params: z.object({}),
+      query: z.object({}),
     };
   };
 

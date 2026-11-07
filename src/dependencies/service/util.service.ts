@@ -21,7 +21,7 @@ export interface IHandlerFunction {
 }
 
 export class UtilService {
-  constructor() { }
+  constructor() {}
 
   createOtp = () => randomInt(100000, 1000000);
 
@@ -85,13 +85,13 @@ export class UtilService {
 
     const messageCode =
       typeof normalizedError.messageCode === 'number' &&
-        Number.isInteger(normalizedError.messageCode)
+      Number.isInteger(normalizedError.messageCode)
         ? normalizedError.messageCode
         : (statusMessageCodes[statusCode] ?? 103);
 
     const language = req.get('accept-language');
 
-    const errorMessage =  languageService.chooseLanguage(language, messageCode);
+    const errorMessage = languageService.chooseLanguage(language, messageCode);
 
     return res.status(statusCode).json({
       errorMessage,

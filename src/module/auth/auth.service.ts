@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { IHandlerResult, utilService, } from '../../dependencies/service/util.service.js';
+import { IHandlerResult, utilService } from '../../dependencies/service/util.service.js';
 import { AuthDTO } from './dto/auth.dto.js';
 import { userRepository } from '../../database/repository/user.repository.js';
 import { cacheService, RedisKeys } from '../../dependencies/service/cache.service.js';
@@ -15,8 +15,6 @@ import {
 } from '../../dependencies/exception/main.exception.js';
 import { GenderEnum, ProviderEnum, SystemRoleEnum } from '../../dependencies/value/databaseEnum.js';
 import { SystemRoleEnum as TokenRoleEnum } from '../../dependencies/value/securityEnum.js';
-
-
 
 export class AuthService {
   constructor() {}
@@ -41,8 +39,7 @@ export class AuthService {
         password: await securityService.hash(payload.password),
         ...(payload.phoneNumber ? { phone: payload.phoneNumber } : {}),
         ...(payload.DOB ? { DOB: new Date(payload.DOB) } : {}),
-        gender:
-          payload.gender === 'MALE' ? GenderEnum.MALE : GenderEnum.FEMALE,
+        gender: payload.gender === 'MALE' ? GenderEnum.MALE : GenderEnum.FEMALE,
         role: SystemRoleEnum.USER,
         provider: ProviderEnum.LOCAL,
         isEmailVerified: false,
@@ -101,8 +98,7 @@ export class AuthService {
         data: {
           firstName: nameParts[0] ?? 'Google',
           lastName: nameParts.slice(1).join(' ') || nameParts[0] || 'User',
-          username:
-            account.email.split('@')[0]?.slice(0, 30) || account.googleId.slice(0, 30),
+          username: account.email.split('@')[0]?.slice(0, 30) || account.googleId.slice(0, 30),
           email: account.email,
           gender: GenderEnum.MALE,
           role: SystemRoleEnum.USER,
@@ -121,9 +117,7 @@ export class AuthService {
     return { status: 201, messageCode: 104, data: credentials };
   };
 
-  requestForgetPassword = async (
-    payload: { email: string }
-  ): Promise<IHandlerResult> => {
+  requestForgetPassword = async (payload: { email: string }): Promise<IHandlerResult> => {
     const email = payload.email.toLowerCase();
     const user = await userRepository.findOne({ filter: { email } });
 
@@ -142,9 +136,11 @@ export class AuthService {
     return { status: 201, messageCode: 104 };
   };
 
-  changePassword = async (
-    payload: { email: string; password: string; confirmPassword: string }
-  ): Promise<IHandlerResult> => {
+  changePassword = async (payload: {
+    email: string;
+    password: string;
+    confirmPassword: string;
+  }): Promise<IHandlerResult> => {
     const email = payload.email.toLowerCase();
     const user = await userRepository.findOne({ filter: { email } });
 
@@ -201,6 +197,11 @@ export class AuthService {
 
     await cacheService.deleteCache(RedisKeys.otpKey(email));
     return { messageCode: 107 };
+  };
+
+  logout = async (userId: string): Promise<IHandlerResult> => {
+    await tokenService.logout(userId);
+    return { messageCode: 106 };
   };
 }
 

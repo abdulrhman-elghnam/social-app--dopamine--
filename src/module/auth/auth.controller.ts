@@ -25,7 +25,7 @@ export class AuthenticationController {
       validationPipe.schema(authDTO.signupDTO),
       utilService.responseFormatter({
         handler: (req: Request, _res: Response, _next: NextFunction) => {
-          console.log("test");
+          console.log('test');
 
           return authService.signup(req.body);
         },
