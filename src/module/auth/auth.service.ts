@@ -59,7 +59,8 @@ export class AuthService {
   };
 
   login = async (
-    payload: z.infer<ReturnType<AuthDTO['loginDTO']>['body']>
+    payload: z.infer<ReturnType<AuthDTO['loginDTO']>['body']>,
+    issuer: string
   ): Promise<IHandlerResult> => {
     const user = await userRepository.findOne({
       filter: { email: payload.email.toLowerCase(), isActive: true },
@@ -77,13 +78,14 @@ export class AuthService {
         _id: user._id ?? '',
         role: user.role === 'admin' ? TokenRoleEnum.ADMIN : TokenRoleEnum.USER,
       },
-      'dopamine'
+      issuer
     );
     return { messageCode: 309, data: credentials };
   };
 
   googleCredential = async (
-    payload: z.infer<ReturnType<AuthDTO['googleSignUpDTO']>['body']>
+    payload: z.infer<ReturnType<AuthDTO['googleSignUpDTO']>['body']>,
+    issuer: string
   ): Promise<IHandlerResult> => {
     const account = await googleService.verifyGoogleAccount(payload.idToken);
     let user = await userRepository.findOne({
@@ -112,7 +114,7 @@ export class AuthService {
 
     const credentials = await tokenService.createLoginCredentials(
       { _id: user._id ?? '', role: TokenRoleEnum.USER },
-      'dopamine'
+      issuer
     );
     return { status: 201, messageCode: 104, data: credentials };
   };

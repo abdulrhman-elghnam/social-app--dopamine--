@@ -1,5 +1,5 @@
 class UserDTO {
-    constructor() {}
+  constructor() {}
 }
 
 export const userDTO = new UserDTO();

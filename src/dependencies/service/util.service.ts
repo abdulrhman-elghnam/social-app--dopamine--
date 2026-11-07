@@ -25,6 +25,7 @@ export class UtilService {
 
   createOtp = () => randomInt(100000, 1000000);
 
+  issuer = (req: Request) => `${req.protocol}://${req.host}`;
   splitFullName = (fullName: string) => {
     const [firstName, ...rest] = fullName.trim().split(/\s+/);
     return {

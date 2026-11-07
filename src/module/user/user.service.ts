@@ -1,5 +1,5 @@
 class UserService {
-    constructor() {}
+  constructor() {}
 }
 
 export const userService = new UserService();

@@ -105,4 +105,3 @@ export class LimiterGuard {
 }
 
 export const limiterGuard = new LimiterGuard();
-export const generateLimiter = limiterGuard.generateLimiter;

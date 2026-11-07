@@ -37,7 +37,7 @@ export class AuthenticationController {
       validationPipe.schema(authDTO.loginDTO),
       utilService.responseFormatter({
         handler: (req: Request, _res: Response, _next: NextFunction) => {
-          return authService.login(req.body);
+          return authService.login(req.body, utilService.issuer(req));
         },
       })
     );
@@ -47,7 +47,7 @@ export class AuthenticationController {
       validationPipe.schema(authDTO.googleSignUpDTO),
       utilService.responseFormatter({
         handler: (req: Request, _res: Response, _next: NextFunction) => {
-          return authService.googleCredential(req.body);
+          return authService.googleCredential(req.body, utilService.issuer(req));
         },
       })
     );
