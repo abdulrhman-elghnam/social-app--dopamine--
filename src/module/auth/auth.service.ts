@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { AuthDTO } from './dto/authDto.js';
+import { AuthDTO } from './dto/auth.dto.js';
 import { IHandlerResult } from '../../dependencies/service/util.service.js';
 
 export class AuthService {

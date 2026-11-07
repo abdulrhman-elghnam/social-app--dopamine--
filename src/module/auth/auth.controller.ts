@@ -3,7 +3,7 @@ import type { Request, Response, NextFunction, Router as RouterType } from 'expr
 import { validationPipe } from '../../dependencies/pipe/validation.pipe.js';
 
 import { utilService } from '../../dependencies/service/util.service.js';
-import { authDTO } from './dto/authDto.js';
+import { authDTO } from './dto/auth.dto.js';
 import { authService } from './auth.service.js';
 
 export class AuthenticationController {
