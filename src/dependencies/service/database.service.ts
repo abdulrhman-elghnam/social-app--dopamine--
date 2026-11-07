@@ -7,10 +7,10 @@ class DatabaseService {
   connect = async () => {
     try {
       await mongoose.connect(String(configService.get('DATABASE_URI')));
-      console.log({database : `Connected to database`});
+      console.log({ database: `Connected to database` });
     } catch (error) {
-      console.log({database : `Error connecting to database: ${error}`});
-      
+      console.log({ database: `Error connecting to database: ${error}` });
+
       throw error;
     }
   };

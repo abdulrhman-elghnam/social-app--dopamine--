@@ -51,18 +51,11 @@ export class UploadService {
         }
       },
       filename: (_req, file, callback) => {
-        callback(
-          null,
-          `${randomUUID()}${extname(file.originalname).toLowerCase()}`
-        );
+        callback(null, `${randomUUID()}${extname(file.originalname).toLowerCase()}`);
       },
     });
 
-    const fileFilter = (
-      _req: Request,
-      file: Express.Multer.File,
-      callback: FileFilterCallback
-    ) => {
+    const fileFilter = (_req: Request, file: Express.Multer.File, callback: FileFilterCallback) => {
       if (validation.includes(file.mimetype)) {
         callback(null, true);
       } else {
@@ -77,11 +70,7 @@ export class UploadService {
     });
   };
 
-  processFile = async ({
-    customPath = 'general',
-    file,
-    validation = [],
-  }: ProcessFileOptions) => {
+  processFile = async ({ customPath = 'general', file, validation = [] }: ProcessFileOptions) => {
     const result = await fileTypeFromBuffer(file.buffer);
 
     if (!result || !validation.includes(result.mime)) {
@@ -127,10 +116,7 @@ export class UploadService {
     return assets;
   };
 
-  processMulterUpload = ({
-    customPath = 'general',
-    validation = [],
-  }: UploadOptions = {}) => {
+  processMulterUpload = ({ customPath = 'general', validation = [] }: UploadOptions = {}) => {
     return async (req: Request, _res: Response, next: NextFunction) => {
       try {
         if (req.file) {

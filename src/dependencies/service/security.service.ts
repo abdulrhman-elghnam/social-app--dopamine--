@@ -2,7 +2,6 @@ import crypto from 'node:crypto';
 import bcrypt from 'bcrypt';
 import { configService } from './config.service.js';
 
-
 export class SecurityService {
   private readonly encryptionKey: Buffer;
   private readonly ivLength: number;

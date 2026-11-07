@@ -1,10 +1,11 @@
 import { UnauthorizedException } from '../exception/main.exception.js';
 import type { Request, Response, NextFunction } from 'express';
 import { TokenTypeEnum } from '../value/securityEnum.js';
+import { tokenService } from '../service/token.service.js';
 
 class AuthGuard {
   constructor() {}
-  check = (_tokenType: TokenTypeEnum) => {
+  check = (tokenType: TokenTypeEnum) => {
     return async (req: Request, _res: Response, next: NextFunction) => {
       const authorization = req.headers.authorization;
 
@@ -14,11 +15,11 @@ class AuthGuard {
         });
       }
 
-      // const { user, payload } = await decodeToken({ authorization, tokenType });
+      const { user, payload } = await tokenService.decodeToken(authorization, tokenType);
 
-      // req.user = user;
-      // req.payload = payload;
-      
+      req.user = user;
+      req.payload = payload;
+
       next();
     };
   };

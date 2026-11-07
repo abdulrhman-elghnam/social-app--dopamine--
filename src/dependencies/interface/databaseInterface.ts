@@ -1,6 +1,12 @@
-
 import { Types } from 'mongoose';
-import { GenderEnum, MediaTypeEnum, NotificationTypeEnum, PostVisibilityEnum, ProviderEnum, SystemRoleEnum } from '../value/databaseEnum.js';
+import {
+  GenderEnum,
+  MediaTypeEnum,
+  NotificationTypeEnum,
+  PostVisibilityEnum,
+  ProviderEnum,
+  SystemRoleEnum,
+} from '../value/databaseEnum.js';
 
 export interface IUser {
   _id?: Types.ObjectId;
@@ -55,7 +61,7 @@ export interface IPost {
   media: IPostMedia[];
 
   visibility: PostVisibilityEnum;
-  
+
   likesCount: number;
   commentsCount: number;
 
@@ -65,7 +71,6 @@ export interface IPost {
   updatedAt?: Date;
 }
 
-
 export interface ILike {
   _id?: Types.ObjectId;
 
@@ -74,7 +79,6 @@ export interface ILike {
 
   createdAt?: Date;
 }
-
 
 export interface IComment {
   _id?: Types.ObjectId;
@@ -88,7 +92,6 @@ export interface IComment {
   updatedAt?: Date;
 }
 
-
 export interface ISavedPost {
   _id?: Types.ObjectId;
 
@@ -97,7 +100,6 @@ export interface ISavedPost {
 
   createdAt?: Date;
 }
-
 
 export interface IStoryMedia {
   url: string;
@@ -116,8 +118,6 @@ export interface IStory {
   createdAt?: Date;
 }
 
-
-
 export interface INotification {
   _id?: Types.ObjectId;
 
@@ -134,7 +134,6 @@ export interface INotification {
   createdAt?: Date;
 }
 
-
 export interface IConversation {
   _id?: Types.ObjectId;
 
@@ -150,7 +149,6 @@ export interface IConversation {
   createdAt?: Date;
   updatedAt?: Date;
 }
-
 
 export interface IMessageMedia {
   url: string;

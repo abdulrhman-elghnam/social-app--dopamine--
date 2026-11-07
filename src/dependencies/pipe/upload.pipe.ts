@@ -1,5 +1,3 @@
-
-
 import type { NextFunction, Request, RequestHandler, Response } from 'express';
 import { BadRequestException } from '../exception/main.exception.js';
 import { uploadService } from '../service/upload.service.js';
@@ -31,9 +29,7 @@ export class UploadPipe {
 
         const hasUploadedFile = Boolean(req.file || req.files);
         if (isRequired && !hasUploadedFile) {
-          return next(
-            new BadRequestException('File is required', { messageCode: 602 })
-          );
+          return next(new BadRequestException('File is required', { messageCode: 602 }));
         }
 
         try {

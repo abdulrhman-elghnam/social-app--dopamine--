@@ -15,7 +15,9 @@ declare global {
       user?: {
         role: SystemRoleEnum;
       };
+      payload?: {
+        [key: string]: unknown;
+      };
     }
   }
 }
-

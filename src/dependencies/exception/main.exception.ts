@@ -1,4 +1,3 @@
-
 import { AppError, IAppErrorOptions } from './app.exception.js';
 
 export class BadRequestException extends AppError {

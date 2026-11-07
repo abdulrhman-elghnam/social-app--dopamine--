@@ -25,23 +25,24 @@ export class CacheService {
   connect(): Promise<void> {
     return new Promise((resolve, reject) => {
       this.client.on('connect', () => {
-        console.log({cache : `Connected to Redis`});
+        console.log({ cache: `Connected to Redis` });
         resolve();
       });
-    this.client.on('error', (err) => {
-      console.error({cache : `Redis error: ${err}`});
-      reject(err);  
+      this.client.on('error', (err) => {
+        console.error({ cache: `Redis error: ${err}` });
+        reject(err);
+      });
+      this.client.on('close', () => {
+        console.log({ cache: `Redis connection closed` });
+      });
+      this.client.on('reconnecting', () => {
+        console.log({ cache: `Reconnecting to Redis...` });
+      });
+      this.client.on('end', () => {
+        console.log({ cache: `Redis connection ended` });
+      });
     });
-    this.client.on('close', () => {
-      console.log({cache : `Redis connection closed`});
-    });
-    this.client.on('reconnecting', () => {
-      console.log({cache : `Reconnecting to Redis...`});
-    });
-    this.client.on('end', () => {
-      console.log({cache : `Redis connection ended`});
-    });
-  });}
+  }
   private serialize(value: unknown): string {
     const json = JSON.stringify(value);
     if (json === undefined) {

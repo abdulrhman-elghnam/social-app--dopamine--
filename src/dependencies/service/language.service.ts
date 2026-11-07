@@ -41,10 +41,7 @@ export class LanguageService {
       throw lastError;
     };
 
-    const [arabic, english] = await Promise.all([
-      readLanguage('ar'),
-      readLanguage('en'),
-    ]);
+    const [arabic, english] = await Promise.all([readLanguage('ar'), readLanguage('en')]);
 
     this.arabicLanguage = JSON.parse(arabic);
     this.englishLanguage = JSON.parse(english);

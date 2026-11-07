@@ -16,8 +16,6 @@ type SchemaFactory = (language: ApiLanguage) => ValidationSchema;
 export type Translate = (code: number) => string;
 
 export class ValidationPipe {
-  
-
   constructor() {}
 
   schema = (schema: SchemaFactory): RequestHandler => {

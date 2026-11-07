@@ -1,11 +1,6 @@
 import type { Request } from 'express';
 import geoip from 'geoip-lite';
-import {
-  ipKeyGenerator,
-  rateLimit,
-  type Options,
-  type Store,
-} from 'express-rate-limit';
+import { ipKeyGenerator, rateLimit, type Options, type Store } from 'express-rate-limit';
 import { cacheService } from '../service/cache.service.js';
 
 interface LimiterOptions {
@@ -63,8 +58,7 @@ const createRedisStore = (): Store => {
   };
 };
 
-const requestIp = (req: Request): string =>
-  req.ip ?? req.socket.remoteAddress ?? 'unknown';
+const requestIp = (req: Request): string => req.ip ?? req.socket.remoteAddress ?? 'unknown';
 
 export class LimiterGuard {
   constructor() {}
